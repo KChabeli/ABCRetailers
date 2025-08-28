@@ -1,0 +1,98 @@
+﻿@model ABCRetailers.Models.FileUploadModel
+
+@{
+    ViewData["Title"] = "File Upload";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="mb-0">File Upload</h2>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Index" method="post" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="File" class="form-label"></label>
+                            <input asp-for="File" class="form-control" type="file" accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png,.gif,.xlsx,.xls" />
+                            <span asp-validation-for="File" class="text-danger"></span>
+                            <div class="form-text">Maximum file size: 10MB. Allowed types: PDF, DOC, DOCX, TXT, JPG, PNG, GIF, XLSX, XLS</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Description" class="form-label"></label>
+                            <textarea asp-for="Description" class="form-control" rows="3" placeholder="Enter a description for the file..."></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Category" class="form-label"></label>
+                            <select asp-for="Category" class="form-control">
+                                <option value="">-- Select Category --</option>
+                                <option value="Documents">Documents</option>
+                                <option value="Images">Images</option>
+                                <option value="Spreadsheets">Spreadsheets</option>
+                                <option value="Contracts">Contracts</option>
+                                <option value="Invoices">Invoices</option>
+                                <option value="Reports">Reports</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <span asp-validation-for="Category" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Tags" class="form-label"></label>
+                            <input asp-for="Tags" class="form-control" placeholder="Enter tags separated by commas (e.g., important, urgent, draft)" />
+                            <span asp-validation-for="Tags" class="text-danger"></span>
+                            <div class="form-text">Separate multiple tags with commas</div>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a asp-action="Files" class="btn btn-secondary me-md-2">View All Files</a>
+                            <button type="submit" class="btn btn-primary">Upload File</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Upload Guidelines -->
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Upload Guidelines</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="mb-0">
+                        <li>Maximum file size: 10MB</li>
+                        <li>Supported file types: PDF, DOC, DOCX, TXT, JPG, PNG, GIF, XLSX, XLS</li>
+                        <li>Files are stored securely in Azure Blob Storage</li>
+                        <li>Each file gets a unique identifier for security</li>
+                        <li>You can add metadata like description, category, and tags</li>
+                        <li>Files can be downloaded or deleted after upload</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        // File size validation
+        document.querySelector('input[type="file"]').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const maxSize = 10 * 1024 * 1024; // 10MB
+
+            if (file && file.size > maxSize) {
+                alert('File size cannot exceed 10MB');
+                this.value = '';
+            }
+        });
+    </script>
+}

@@ -1,0 +1,82 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+    color: var(--bs-secondary-color);
+    text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+    text-align: start;
+}
+
+/* Home page product cards styling */
+.card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    }
+
+.card-img-top {
+    border-bottom: 1px solid #dee2e6;
+}
+
+.badge {
+    font-size: 0.75rem;
+}
+
+/* Welcome section styling */
+.display-4 {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.lead {
+    color: #7f8c8d;
+    font-size: 1.25rem;
+}
+
+/* Product price styling */
+.text-primary {
+    color: #e74c3c !important;
+    font-weight: 600;
+}
+
+/* Button styling */
+.btn-outline-primary:hover {
+    background-color: #3498db;
+    border-color: #3498db;
+}
+
+.btn-primary {
+    background-color: #e74c3c;
+    border-color: #e74c3c;
+}
+
+    .btn-primary:hover {
+        background-color: #c0392b;
+        border-color: #c0392b;
+    }

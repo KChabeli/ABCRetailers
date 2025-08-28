@@ -1,0 +1,50 @@
+﻿@model IEnumerable<ABCRetailers.Models.Order>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>📋 Orders</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Create New Order
+    </a>
+</p>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Customer</th>
+            <th>Product</th>
+            <th>Order Date</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Total Price</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.RowKey</td>
+                <td>@(ViewBag.CustomerNames?[item.CustomerId] ?? item.CustomerId)</td>
+                <td>@(ViewBag.ProductNames?[item.ProductId] ?? item.ProductId)</td>
+                <td>@item.OrderDate.ToShortDateString()</td>
+                <td>@item.Quantity</td>
+                <td>@item.UnitPrice.ToString("C")</td>
+                <td>@item.TotalPrice.ToString("C")</td>
+                <td>@item.Status</td>
+                <td>
+                    <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@item.RowKey">Edit</a>
+                    <a class="btn btn-sm btn-info" asp-action="Details" asp-route-id="@item.RowKey">Details</a>
+                    <form asp-action="Delete" asp-route-id="@item.RowKey" method="post" style="display:inline">
+                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Delete this order?');">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
